@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -20,17 +21,11 @@ public class Employee {
 	private String employeeId;
 	private String firstName;
 	private String lastName;
-	@OneToMany(mappedBy = "employee", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
-		      CascadeType.REFRESH })
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name="pc_fid",referencedColumnName = "uniqueId")
 	private List<PhoneNumber> phoneNumbers;
 	private Date doj;
 	private Integer salary;
-	public Integer getUniqueId() {
-		return uniqueId;
-	}
-	public void setUniqueId(Integer uniqueId) {
-		this.uniqueId = uniqueId;
-	}
 	public String getEmployeeId() {
 		return employeeId;
 	}
@@ -49,10 +44,10 @@ public class Employee {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public List<PhoneNumber> getPhoneNumber() {
+	public List<PhoneNumber> getPhoneNumbers() {
 		return phoneNumbers;
 	}
-	public void setPhoneNumber(List<PhoneNumber> phoneNumbers) {
+	public void setPhoneNumbers(List<PhoneNumber> phoneNumbers) {
 		this.phoneNumbers = phoneNumbers;
 	}
 	public Date getDoj() {
@@ -71,10 +66,10 @@ public class Employee {
 	public String toString() {
 		return "Employee [uniqueId=" + uniqueId + ", employeeId=" + employeeId + ", firstName=" + firstName
 				+ ", lastName=" + lastName + ", phoneNumbers=" + phoneNumbers + ", doj=" + doj + ", salary=" + salary
-				+ ", getUniqueId()=" + getUniqueId() + ", getEmployeeId()=" + getEmployeeId() + ", getFirstName()="
-				+ getFirstName() + ", getLastName()=" + getLastName() + ", getPhoneNumber()=" + getPhoneNumber()
-				+ ", getDoj()=" + getDoj() + ", getSalary()=" + getSalary() + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+				+ ", getEmployeeId()=" + getEmployeeId() + ", getFirstName()=" + getFirstName() + ", getLastName()="
+				+ getLastName() + ", getPhoneNumbers()=" + getPhoneNumbers() + ", getDoj()=" + getDoj()
+				+ ", getSalary()=" + getSalary() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ ", toString()=" + super.toString() + "]";
 	}
 	
 	
